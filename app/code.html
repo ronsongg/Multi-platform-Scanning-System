@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Omni Scan - 全能扫描系统</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2563eb",
+              "background-light": "#f3f4f6",
+              "background-dark": "#0f172a",
+              "card-dark": "#1e293b",
+              "accent-green": "#10b981",
+            },
+            fontFamily: {
+              display: ["Inter", "system-ui", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+            },
+          },
+        },
+      };
+    </script>
+<style>
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .progress-bar-inner {
+            width: 0%;
+            transition: width 0.3s ease;
+        }::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex justify-center">
+<div class="w-full max-w-md bg-white dark:bg-[#0b1120] min-h-screen flex flex-col shadow-2xl relative overflow-hidden">
+<header class="p-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
+<span class="material-icons block">menu</span>
+</button>
+<h1 class="text-lg font-bold tracking-tight">全能扫描系统</h1>
+</div>
+<div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800/50 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700/50">
+<span class="text-xs text-slate-500 dark:text-slate-400">连接状态</span>
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-accent-green animate-pulse"></span>
+<span class="text-xs font-medium text-accent-green">在线</span>
+</div>
+</div>
+</header>
+<main class="flex-1 overflow-y-auto pb-20">
+<section class="p-4 space-y-4">
+<div class="flex items-center justify-between">
+<div class="space-y-1">
+<p class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">批次进度</p>
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-black">0</span>
+<span class="text-xl text-slate-400">/</span>
+<span class="text-3xl font-black text-slate-400">0</span>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<button class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 px-4 py-2 rounded-lg text-sm font-medium hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700">
+<span class="material-icons text-base">list_alt</span>
+                            未扫清单
+                        </button>
+<span class="text-3xl font-black text-primary italic">0%</span>
+</div>
+</div>
+<div class="w-full h-2 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary progress-bar-inner"></div>
+</div>
+</section>
+<section class="px-4 py-2">
+<div class="flex gap-2 p-1.5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl">
+<div class="flex-1 flex items-center px-3 gap-3">
+<span class="material-icons text-slate-400">qr_code_scanner</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-sm placeholder:text-slate-500 dark:placeholder:text-slate-600" placeholder="请扫描单号..." type="text"/>
+</div>
+<button class="bg-primary hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 transition-all active:scale-95">
+                        确认
+                    </button>
+</div>
+</section>
+<section class="px-4 py-6">
+<div class="aspect-[4/3] w-full bg-slate-50 dark:bg-slate-900/40 rounded-3xl border-2 border-dashed border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center gap-4 relative group cursor-pointer overflow-hidden">
+<div class="absolute inset-0 opacity-10 dark:opacity-20 flex items-center justify-center pointer-events-none">
+<span class="material-icons text-[120px]">crop_free</span>
+</div>
+<div class="w-16 h-16 rounded-full bg-slate-200/50 dark:bg-slate-800/50 flex items-center justify-center text-slate-400 dark:text-slate-600 transition-transform group-hover:scale-110">
+<span class="material-icons text-3xl">center_focus_weak</span>
+</div>
+<div class="text-center">
+<p class="text-slate-500 dark:text-slate-400 font-medium">等待扫描</p>
+<p class="text-xs text-slate-400 dark:text-slate-500 mt-1">对准条码或二维码自动识别</p>
+</div>
+<div class="absolute top-6 left-6 w-8 h-8 border-t-4 border-l-4 border-primary/30 rounded-tl-lg"></div>
+<div class="absolute top-6 right-6 w-8 h-8 border-t-4 border-r-4 border-primary/30 rounded-tr-lg"></div>
+<div class="absolute bottom-6 left-6 w-8 h-8 border-b-4 border-l-4 border-primary/30 rounded-bl-lg"></div>
+<div class="absolute bottom-6 right-6 w-8 h-8 border-b-4 border-r-4 border-primary/30 rounded-br-lg"></div>
+</div>
+</section>
+<section class="mt-4 bg-slate-50 dark:bg-slate-900/20 rounded-t-[2.5rem] border-t border-slate-200 dark:border-slate-800 min-h-[300px]">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-icons text-primary">history</span>
+<h2 class="text-lg font-bold">实时记录</h2>
+</div>
+<div class="flex items-center gap-1.5 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span class="text-[10px] font-bold text-primary uppercase">实时同步中</span>
+</div>
+</div>
+<div class="flex gap-2 mb-8">
+<button class="px-5 py-2 rounded-xl bg-primary text-white text-sm font-bold shadow-md shadow-primary/20">
+                            全部
+                        </button>
+<button class="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-medium hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+                            成功
+                        </button>
+<button class="px-5 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-sm font-medium hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+                            异常
+                        </button>
+</div>
+<div class="flex flex-col items-center justify-center py-12 text-slate-400 dark:text-slate-600">
+<span class="material-icons text-5xl mb-3 opacity-20">inventory_2</span>
+<p class="text-sm font-medium">暂无扫描记录</p>
+</div>
+</div>
+</section>
+</main>
+<nav class="absolute bottom-0 left-0 right-0 bg-white/80 dark:bg-[#0b1120]/80 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-10">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons">barcode_reader</span>
+<span class="text-[10px] font-bold">扫描</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons">storage</span>
+<span class="text-[10px] font-bold">库存</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons">settings</span>
+<span class="text-[10px] font-bold">设置</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors">
+<span class="material-icons">account_circle</span>
+<span class="text-[10px] font-bold">我的</span>
+</button>
+</nav>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+</div>
+<div class="fixed bottom-4 right-4 z-50">
+<button class="p-3 bg-white dark:bg-slate-800 rounded-full shadow-xl border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-white" onclick="document.documentElement.classList.toggle('dark')">
+<span class="material-icons block dark:hidden">dark_mode</span>
+<span class="material-icons hidden dark:block">light_mode</span>
+</button>
+</div>
+<script>
+        // Set initial theme based on preference or default to dark as per reference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        } else {
+            // Defaulting to dark mode to match the reference screenshot's vibe
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+
+</body></html>

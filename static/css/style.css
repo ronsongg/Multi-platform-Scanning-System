@@ -1,0 +1,819 @@
+/* ========================================
+   全能扫描系统 - PC管理页面样式
+   ======================================== */
+
+/* Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #1a1a2e;
+    color: #ffffff;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ========== Header ========== */
+.header {
+    width: 100%;
+    padding: 24px 0;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background-color: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-title .icon {
+    color: #4a90d9;
+    font-size: 28px;
+}
+
+/* ========== Main Layout ========== */
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 48px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+@media (min-width: 768px) {
+    .main-container {
+        grid-template-columns: 4fr 8fr;
+    }
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ========== Card ========== */
+.card {
+    background-color: #16213e;
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-title .icon {
+    color: #4a90d9;
+}
+
+/* ========== QR Code Section ========== */
+.qr-hint {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 11px;
+    text-align: center;
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* QR Code Modal */
+.qr-modal-box {
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+}
+
+.qr-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.qr-modal-close {
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.qr-modal-close:hover {
+    color: #ffffff;
+}
+
+.qr-modal-body .qr-image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.qr-modal-body .qr-image-container img {
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 8px;
+    display: none;
+}
+
+.qr-modal-body .qr-placeholder {
+    width: 220px;
+    height: 220px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 14px;
+}
+
+.qr-modal-body .server-url {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    word-break: break-all;
+    margin-bottom: 8px;
+}
+
+.qr-modal-body .server-hint {
+    color: rgba(255, 255, 255, 0.35);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+/* ========== Buttons ========== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background-color: #4a90d9;
+    color: #ffffff;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(74, 144, 217, 0.2);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: rgba(74, 144, 217, 0.9);
+}
+
+.btn-secondary {
+    background-color: #333333;
+    color: #ffffff;
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: rgba(51, 51, 51, 0.8);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* Small action buttons */
+.btn-action {
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+}
+
+.btn-action .icon {
+    font-size: 14px;
+}
+
+.btn-success {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: rgba(40, 167, 69, 0.3);
+}
+
+.btn-export {
+    background-color: rgba(74, 144, 217, 0.2);
+    color: #4a90d9;
+}
+
+.btn-export:hover {
+    background-color: rgba(74, 144, 217, 0.3);
+}
+
+.btn-danger {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: rgba(220, 53, 69, 0.3);
+}
+
+/* ========== Upload Section ========== */
+.upload-section .card-title {
+    margin-bottom: 16px;
+}
+
+.upload-section .hidden-input {
+    display: none;
+}
+
+/* Upload Dialog */
+.upload-dialog {
+    max-width: 380px;
+    width: 90%;
+}
+
+.upload-dialog-file {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: 'Consolas', 'Monaco', monospace;
+    margin-bottom: 16px;
+    word-break: break-all;
+}
+
+.upload-dialog-input {
+    width: 100%;
+    background-color: #1a1a2e;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: #ffffff;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 20px;
+}
+
+.upload-dialog-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.upload-dialog-input:focus {
+    border-color: #4a90d9;
+    box-shadow: 0 0 0 2px rgba(74, 144, 217, 0.25);
+}
+
+/* ========== Dataset List ========== */
+.dataset-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.dataset-section .badge {
+    padding: 4px 10px;
+    background-color: rgba(74, 144, 217, 0.1);
+    color: #4a90d9;
+    font-size: 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.dataset-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Date Group */
+.date-group {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.date-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background-color: rgba(26, 26, 46, 0.5);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s;
+}
+
+.date-group-header:hover {
+    background-color: rgba(26, 26, 46, 0.8);
+}
+
+.date-group-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.date-group-arrow {
+    transition: transform 0.2s ease;
+    color: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+}
+
+.date-group-arrow.rotated {
+    transform: rotate(90deg);
+}
+
+.date-group-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.date-group-count {
+    font-size: 11px;
+    font-weight: 600;
+    color: #4a90d9;
+    background-color: rgba(74, 144, 217, 0.12);
+    padding: 1px 7px;
+    border-radius: 10px;
+}
+
+.date-group-date {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.25);
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+.date-group-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    transition: none;
+}
+
+.date-group-body.collapsed {
+    display: none;
+}
+
+.dataset-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 14px;
+}
+
+.dataset-card {
+    background-color: rgba(26, 26, 46, 0.5);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: border-color 0.2s ease;
+}
+
+.dataset-card:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dataset-card.is-current {
+    border-color: rgba(74, 144, 217, 0.3);
+    box-shadow: 0 0 20px rgba(74, 144, 217, 0.05);
+}
+
+.dataset-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.dataset-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+}
+
+.dataset-info .file-name {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+.dataset-info .current-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: rgba(74, 144, 217, 0.2);
+    color: #4a90d9;
+    font-size: 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.dataset-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+/* Progress Bar */
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 8px;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+    height: 8px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background-color: #4a90d9;
+    box-shadow: 0 0 10px rgba(74, 144, 217, 0.5);
+    transition: width 0.5s ease;
+}
+
+.progress-bar-fill.complete {
+    background-color: #28a745;
+    box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+}
+
+/* ========== Scan Records Table ========== */
+.records-section {
+    padding: 0;
+    overflow: hidden;
+}
+
+.records-header {
+    padding: 24px 24px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.records-header .card-title {
+    margin-bottom: 0;
+}
+
+.status-legend {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.status-legend .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-dot.normal { background-color: #28a745; }
+.status-dot.duplicate { background-color: #ffc107; }
+.status-dot.not-found { background-color: #dc3545; }
+
+.legend-normal { color: #28a745; }
+.legend-duplicate { color: #ffc107; }
+.legend-not-found { color: #dc3545; }
+
+/* Table */
+.records-table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+.records-table thead tr {
+    background-color: rgba(26, 26, 46, 0.3);
+}
+
+.records-table th {
+    padding: 14px 24px;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.records-table th:last-child {
+    text-align: right;
+}
+
+.records-table td {
+    padding: 14px 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.records-table tbody tr {
+    transition: background-color 0.15s ease;
+    border-left: 4px solid transparent;
+}
+
+.records-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.records-table tbody tr.status-normal {
+    border-left-color: #28a745;
+}
+
+.records-table tbody tr.status-duplicate {
+    border-left-color: #ffc107;
+}
+
+.records-table tbody tr.status-not-found {
+    border-left-color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.05);
+}
+
+.records-table .cell-boxid {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-weight: 500;
+}
+
+.records-table .cell-secondary {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.records-table .cell-time {
+    color: rgba(255, 255, 255, 0.4);
+    text-align: right;
+    font-size: 12px;
+}
+
+.records-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 14px;
+}
+
+.records-footer {
+    padding: 14px;
+    background-color: rgba(26, 26, 46, 0.2);
+    text-align: center;
+}
+
+.records-footer button {
+    background: none;
+    border: none;
+    color: #4a90d9;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 4px 8px;
+}
+
+.records-footer button:hover {
+    text-decoration: underline;
+}
+
+/* ========== Footer ========== */
+.footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 12px;
+}
+
+/* ========== Toast Notification ========== */
+.toast-container {
+    position: fixed;
+    top: 80px;
+    right: 24px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toast {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    animation: toast-in 0.3s ease, toast-out 0.3s ease 2.7s;
+    max-width: 360px;
+}
+
+.toast.success {
+    background-color: #28a745;
+}
+
+.toast.error {
+    background-color: #dc3545;
+}
+
+.toast.info {
+    background-color: #4a90d9;
+}
+
+@keyframes toast-in {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toast-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
+
+/* ========== Confirm Dialog ========== */
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fade-in 0.2s ease;
+}
+
+.dialog-box {
+    background-color: #16213e;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.dialog-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.dialog-message {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.dialog-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.dialog-actions .btn {
+    padding: 8px 20px;
+    font-size: 14px;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ========== Loading Spinner ========== */
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 767px) {
+    .header-title {
+        font-size: 22px;
+    }
+
+    .main-container {
+        padding: 0 16px 32px;
+    }
+
+    .dataset-card-header {
+        flex-direction: column;
+    }
+
+    .dataset-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .records-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+}

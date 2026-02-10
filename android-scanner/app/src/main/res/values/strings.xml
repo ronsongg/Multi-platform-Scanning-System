@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">全能扫描</string>
+    <string name="title_scan">扫描</string>
+    <string name="title_inventory">库存</string>
+    <string name="title_settings">设置</string>
+    <string name="title_profile">我的</string>
+
+    <!-- Header -->
+    <string name="system_title">全能扫描系统</string>
+    <string name="connection_status">连接状态</string>
+    <string name="status_online">在线</string>
+    <string name="status_offline">离线</string>
+    <string name="status_connecting">连接中…</string>
+
+    <!-- Scan page -->
+    <string name="batch_progress">批次进度</string>
+    <string name="unscanned_list">未扫清单</string>
+    <string name="scan_input_hint">请扫描单号…</string>
+    <string name="btn_confirm">确认</string>
+    <string name="waiting_scan">等待扫描</string>
+    <string name="waiting_scan_hint">对准条码或二维码自动识别</string>
+    <string name="real_time_records">实时记录</string>
+    <string name="syncing">实时同步中</string>
+    <string name="filter_all">全部</string>
+    <string name="filter_success">成功</string>
+    <string name="filter_error">异常</string>
+    <string name="no_records">暂无扫描记录</string>
+    <string name="scan_not_found">未找到该箱号</string>
+    <string name="already_scanned">已扫描</string>
+    <string name="progress_format">%1$d / %2$d</string>
+    <string name="percentage_format">%1$d%%</string>
+
+    <!-- TTS -->
+    <string name="tts_zone_prefix">分区</string>
+
+    <!-- Settings page -->
+    <string name="settings_title">连接设置</string>
+    <string name="scan_qr_connect">扫码连接</string>
+    <string name="scan_qr_hint">扫描PC端二维码快速连接</string>
+    <string name="manual_input">手动输入</string>
+    <string name="server_url_hint">请输入服务器地址 (如 http://192.168.1.100:5000)</string>
+    <string name="btn_connect">连接</string>
+    <string name="btn_test_connection">测试连接</string>
+    <string name="connection_success">连接成功</string>
+    <string name="connection_failed">连接失败</string>
+    <string name="dataset_select">选择数据集</string>
+    <string name="no_dataset">请先在PC端创建数据集</string>
+    <string name="current_server">当前服务器</string>
+    <string name="not_connected">未连接</string>
+
+    <!-- Inventory page -->
+    <string name="inventory_placeholder">库存功能开发中…</string>
+
+    <!-- Profile page -->
+    <string name="profile_placeholder">个人中心开发中…</string>
+
+    <!-- Errors -->
+    <string name="error_network">网络连接失败</string>
+    <string name="error_timeout">连接超时，正在重试…</string>
+
+    <!-- Audio Settings -->
+    <string name="audio_settings">语音设置</string>
+    <string name="voice_speed">语音播报速度</string>
+    <string name="error_server">服务器错误</string>
+    <string name="error_invalid_url">请输入有效的服务器地址</string>
+
+    <!-- General -->
+    <string name="pending_uploads">待上传</string>
+    <string name="items_unit">条</string>
+</resources>

@@ -1,0 +1,121 @@
+│ Plan to implement                                                                                                        │
+│                                                                                                                          │
+│ Android 手持终端扫描应用 - 实施计划                                                                                      │
+│                                                                                                                          │
+│ 背景                                                                                                                     │
+│                                                                                                                          │
+│ 基于 app/code.html UI 参考和 doc/ 开发文档，构建仓库手持终端 Android 原生应用。应用通过局域网连接 PC 端 Flask            │
+│ 后端，实现扫码查询、语音播报、进度跟踪等功能。                                                                           │
+│                                                                                                                          │
+│ 架构决策                                                                                                                 │
+│                                                                                                                          │
+│ - 单 Activity + 4 Fragment（底部导航）：匹配 UI 截图设计，非原文档的双 Activity 方案                                     │
+│ - Kotlin + 协程：所有异步操作使用 suspend 函数                                                                           │
+│ - 共享 ViewModel：MainViewModel（Activity 级）管理连接状态、数据集、进度；Fragment 各有独立 ViewModel                    │
+│ - 颜色方案采用 UI 参考：Primary #2563eb、Background #0f172a、Card #1e293b（非旧文档色值）                                │
+│                                                                                                                          │
+│ 项目结构                                                                                                                 │
+│                                                                                                                          │
+│ android-scanner/                                                                                                         │
+│ ├── build.gradle.kts              # 项目级                                                                               │
+│ ├── settings.gradle.kts                                                                                                  │
+│ ├── gradle.properties                                                                                                    │
+│ ├── app/                                                                                                                 │
+│ │   ├── build.gradle.kts          # 模块级（依赖、SDK配置）                                                              │
+│ │   └── src/main/                                                                                                        │
+│ │       ├── AndroidManifest.xml                                                                                          │
+│ │       ├── res/                                                                                                         │
+│ │       │   ├── values/colors.xml, strings.xml, themes.xml                                                               │
+│ │       │   ├── drawable/         # 输入框背景、扫描框角标、按钮样式等                                                   │
+│ │       │   ├── layout/           # activity_main, fragment_scan/settings/inventory/profile, item_scan_record            │
+│ │       │   ├── menu/bottom_nav_menu.xml                                                                                 │
+│ │       │   ├── navigation/nav_graph.xml                                                                                 │
+│ │       │   └── raw/warning_beep.ogg                                                                                     │
+│ │       └── java/com/scanner/app/                                                                                        │
+│ │           ├── ScannerApp.kt                    # Application                                                           │
+│ │           ├── data/                                                                                                    │
+│ │           │   ├── remote/                      # Retrofit: ApiService, RetrofitClient, models/                         │
+│ │           │   ├── local/                       # Room: AppDatabase, entities, DAOs                                     │
+│ │           │   └── repository/                  # ScanRepository, ConnectionRepository                                  │
+│ │           ├── ui/                                                                                                      │
+│ │           │   ├── MainActivity.kt + MainViewModel.kt                                                                   │
+│ │           │   ├── scan/ScanFragment.kt + ScanViewModel.kt + ScanRecordAdapter.kt                                       │
+│ │           │   ├── settings/SettingsFragment.kt + SettingsViewModel.kt                                                  │
+│ │           │   ├── inventory/InventoryFragment.kt                                                                       │
+│ │           │   └── profile/ProfileFragment.kt                                                                           │
+│ │           └── util/                                                                                                    │
+│ │               ├── TTSHelper.kt                 # 中文语音播报                                                          │
+│ │               ├── SoundHelper.kt               # 警告音效                                                              │
+│ │               ├── ScanReceiver.kt              # 硬件扫描头广播接收                                                    │
+│ │               └── Constants.kt                                                                                         │
+│                                                                                                                          │
+│ 实施阶段（共10步）                                                                                                       │
+│                                                                                                                          │
+│ 第1步：项目骨架                                                                                                          │
+│                                                                                                                          │
+│ 创建 settings.gradle.kts、build.gradle.kts（项目+模块）、gradle.properties、AndroidManifest.xml、ScannerApp.kt           │
+│                                                                                                                          │
+│ 第2步：资源文件                                                                                                          │
+│                                                                                                                          │
+│ colors.xml、strings.xml、themes.xml + 所有 drawable XML + bottom_nav_menu.xml + nav_graph.xml + 音效文件                 │
+│                                                                                                                          │
+│ 第3步：网络数据模型                                                                                                      │
+│                                                                                                                          │
+│ ScanRequest、ScanResponse、DatasetResponse、ProgressResponse、RecentRecordsResponse                                      │
+│                                                                                                                          │
+│ 第4步：网络层                                                                                                            │
+│                                                                                                                          │
+│ ApiService（Retrofit 接口）、RetrofitClient（支持动态 baseUrl 切换）                                                     │
+│                                                                                                                          │
+│ 第5步：本地数据库                                                                                                        │
+│                                                                                                                          │
+│ Room: AppDatabase、CachedScanRecord Entity + DAO、ServerConfig Entity + DAO                                              │
+│                                                                                                                          │
+│ 第6步：Repository 层                                                                                                     │
+│                                                                                                                          │
+│ ScanRepository（扫描提交+离线缓存+待上传）、ConnectionRepository（连接验证+进度查询）                                    │
+│                                                                                                                          │
+│ 第7步：工具类                                                                                                            │
+│                                                                                                                          │
+│ TTSHelper（分区号→中文播报）、SoundHelper（未找到警告音）、ScanReceiver（硬件扫描广播）、Constants                       │
+│                                                                                                                          │
+│ 第8步：布局文件                                                                                                          │
+│                                                                                                                          │
+│ activity_main.xml（标题栏+Fragment容器+底部导航）                                                                        │
+│ fragment_scan.xml（进度区+输入区+扫描视窗+记录区 — 严格匹配截图）                                                        │
+│ fragment_settings.xml（扫码连接+手动输入+数据集选择）                                                                    │
+│ fragment_inventory.xml、fragment_profile.xml（占位）                                                                     │
+│ item_scan_record.xml（记录行）                                                                                           │
+│                                                                                                                          │
+│ 第9步：ViewModel                                                                                                         │
+│                                                                                                                          │
+│ MainViewModel（连接状态、当前数据集、进度轮询5秒、自动重连、待上传同步）                                                 │
+│ ScanViewModel（扫描结果状态、记录列表、过滤模式）                                                                        │
+│ SettingsViewModel（连接测试、数据集列表）                                                                                │
+│                                                                                                                          │
+│ 第10步：Activity + Fragment                                                                                              │
+│                                                                                                                          │
+│ MainActivity（底部导航、标题栏连接状态、扫描广播接收、TTS/Sound初始化）                                                  │
+│ ScanFragment（扫描输入、结果显示4种状态、语音/音效触发、记录过滤标签）                                                   │
+│ SettingsFragment（ZXing扫码、手动URL、连接测试）                                                                         │
+│ InventoryFragment/ProfileFragment（占位页）                                                                              │
+│ ScanRecordAdapter（RecyclerView适配器）                                                                                  │
+│                                                                                                                          │
+│ 关键依赖                                                                                                                 │
+│                                                                                                                          │
+│ androidx.navigation:navigation-fragment-ktx:2.7.6                                                                        │
+│ com.google.android.material:material:1.11.0                                                                              │
+│ androidx.room:room-ktx:2.6.1 + room-compiler (KSP)                                                                       │
+│ com.squareup.retrofit2:retrofit:2.9.0 + converter-gson                                                                   │
+│ com.journeyapps:zxing-android-embedded:4.3.0                                                                             │
+│ org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3                                                                   │
+│                                                                                                                          │
+│ 验证方式                                                                                                                 │
+│                                                                                                                          │
+│ 1. 项目编译通过（./gradlew assembleDebug）                                                                               │
+│ 2. 安装到设备/模拟器启动不崩溃                                                                                           │
+│ 3. 设置页输入 PC 端地址（如 http://192.168.x.x:5000）能连接成功                                                          │
+│ 4. 扫描页手动输入箱号 → 正确显示分区/门店 + 语音播报                                                                     │
+│ 5. 进度条实时更新                                                                                                        │
+│ 6. 断网时扫描记录本地缓存，恢复后自动上传                                                                                │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯

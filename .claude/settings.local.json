@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(timeout:*)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(where:*)",
+      "Bash(java:*)",
+      "Bash(echo:*)",
+      "Bash(JAVA_HOME=\"/c/Program Files/Zulu/zulu-17\" \"/c/Users/rons/.gradle/wrapper/dists/gradle-8.2-bin/bbg7u40eoinfdyxsxr3z4i7ta/gradle-8.2/bin/gradle.bat\":*)",
+      "Bash(JAVA_HOME=\"C:/Program Files/Zulu/zulu-17\" ANDROID_HOME=\"C:/Users/rons/AppData/Local/Android/Sdk\" ./gradlew.bat:*)",
+      "Bash(.gradlew.bat clean assembleDebug)",
+      "Bash(cmd //c \"gradlew.bat clean assembleDebug\")",
+      "Bash(cmd /c \"gradlew.bat clean assembleDebug\")",
+      "Bash(cmd /c \"cd /d D:\\\\AI\\\\Multi-platform Scanning System\\\\android-scanner && gradlew.bat clean assembleDebug\")",
+      "Bash(cmd /c \"cd /d D:\\\\AI\\\\Multi-platform Scanning System\\\\android-scanner & gradlew.bat clean assembleDebug\")",
+      "Bash(\"D:/AI/Multi-platform Scanning System/android-scanner/gradlew.bat\" -p \"D:/AI/Multi-platform Scanning System/android-scanner\" clean assembleDebug)",
+      "Bash(bash gradlew:*)",
+      "Bash(wc:*)"
+    ]
+  }
+}

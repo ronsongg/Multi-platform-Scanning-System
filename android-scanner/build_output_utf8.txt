@@ -1,0 +1,177 @@
+﻿> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors
+> Task :app:dataBindingMergeDependencyArtifactsDebug UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:dataBindingGenBaseClassesDebug UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:kspDebugKotlin UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+
+> Task :app:compileDebugKotlin
+.\gradlew.bat : e: file:///D:/AI/Multi-platfor
+m%20Scanning%20System/android-scanner/app/src/
+main/java/com/scanner/app/util/AudioHelper.kt:
+22:30 Unresolved reference: mediaPlayer
+所在位置 行:1 字符: 1
++ .\gradlew.bat assembleDebug > build_output.t
+xt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo          : NotSpecified: ( 
+   e: file:///D:/A...ce: mediaPlayer:String)  
+   [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandEr 
+   ror
+ 
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:24:17 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:24:30 Variable e
+xpected
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:36:17 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:38:17 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:41:17 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:55:13 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:57:13 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:60:13 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:71:13 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:73:13 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:76:13 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:87:13 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:89:13 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:92:13 Unresolved
+ reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:103:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:105:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:108:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:119:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:121:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:124:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:135:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:137:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:140:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:161:13 Unresolve
+d reference: mediaPlayer
+e: file:///D:/AI/Multi-platform%20Scanning%20S
+ystem/android-scanner/app/src/main/java/com/sc
+anner/app/util/AudioHelper.kt:162:13 Unresolve
+d reference: mediaPlayer
+
+> Task :app:compileDebugKotlin FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugKo
+tlin'.
+> A failure occurred while executing org.jetbr
+ains.kotlin.compilerRunner.GradleCompilerRunne
+rWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more detai
+ls
+
+* Try:
+> Run with --stacktrace option to get the stac
+k trace.
+> Run with --info or --debug option to get mor
+e log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 5s
+29 actionable tasks: 2 executed, 27 up-to-date
