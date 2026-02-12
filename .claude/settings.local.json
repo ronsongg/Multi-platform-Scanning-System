@@ -19,7 +19,15 @@
       "Bash(cmd /c \"cd /d D:\\\\AI\\\\Multi-platform Scanning System\\\\android-scanner & gradlew.bat clean assembleDebug\")",
       "Bash(\"D:/AI/Multi-platform Scanning System/android-scanner/gradlew.bat\" -p \"D:/AI/Multi-platform Scanning System/android-scanner\" clean assembleDebug)",
       "Bash(bash gradlew:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git config:*)",
+      "Bash(gh repo view:*)",
+      "Bash(git count-objects:*)",
+      "Bash(gh repo:*)",
+      "Bash(gh auth:*)",
+      "Bash(git remote set-url:*)"
     ]
   }
 }
