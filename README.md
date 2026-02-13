@@ -1,6 +1,6 @@
 # Multi-platform Scanning System
 
-仓库/物流分拣多平台扫描系统，由 PC 端 Flask 后端 + Web 管理界面 和 Android 手持终端原生应用组成，通过局域网通信实现扫码查询、语音播报、进度跟踪等功能。
+仓库/物流分拣多平台扫描系统，由 PC 端 Flask 后端 + Web 管理界面 和 Android 手持终端原生应用组成，通过局域网通信实现扫码查询、语音播报、离线扫描、进度跟踪等功能。
 
 ## 系统架构
 
@@ -22,16 +22,19 @@
 
 - **数据导入** — 上传 Excel (.xlsx) 文件，自动解析箱号、门店地址、分区信息
 - **实时监控** — 扫描进度跟踪（已扫/总数/百分比）、最近扫描记录展示
-- **数据导出** — 将扫描结果导出为 Excel 文件
-- **多数据集管理** — 支持多个数据集并发管理与切换
+- **数据导出** — 将扫描结果导出为 Excel 文件，包含扫描结果和异常记录（未找到箱号）两个工作表
+- **多数据集管理** — 支持多个数据集并发管理、切换与删除
 - **设备连接** — 自动检测本机 IP，生成二维码供手持终端快速连接
 
 ### Android 端
 
-- **硬件扫码集成** — 通过 BroadcastReceiver 接收手持终端内置扫码头数据
+- **硬件扫码集成** — 通过 BroadcastReceiver 接收手持终端内置扫码头数据，兼容 Symbol/Zebra、Honeywell、Newland 等主流品牌
 - **扫描结果展示** — 大字号分区显示，颜色编码（绿色=正常，黄色=重复，红色=未找到）
-- **语音播报** — 预录音频文件播报分区号，TTS 备选方案
-- **离线缓存** — 断网时扫描数据本地缓存（Room），恢复连接后自动同步
+- **语音播报** — 预录音频文件播报分区号和状态提示，支持 0.5x ~ 2.0x 变速播放
+- **离线扫描** — 支持下载数据集到本地，断网时本地缓存扫描（Room），恢复连接后自动同步上传
+- **自动重连** — 连接断开后自动尝试重新连接服务器
+- **记录筛选** — 支持按全部/成功/异常筛选扫描记录
+- **深色/浅色主题** — Material Design 3 风格，支持深色与浅色主题切换
 - **二维码连接** — 扫描 PC 端二维码自动配置服务器地址
 
 ## 技术栈
@@ -45,9 +48,10 @@
 | Android 语言 | Kotlin | 协程异步处理 |
 | Android 架构 | MVVM | ViewModel + LiveData |
 | Android 网络 | Retrofit2 + OkHttp3 | REST 客户端 |
-| Android 本地存储 | Room | 离线缓存 |
-| Android UI | Material Design 3 | 现代 UI 组件 |
+| Android 本地存储 | Room | 离线缓存与本地数据集 |
+| Android UI | Material Design 3 | 深色/浅色主题 |
 | 二维码 | qrcode (PC) / ZXing (Android) | 生成与扫描 |
+| TTS 语音生成 | edge-tts | 微软 Edge 超自然语音（中文） |
 
 ## 项目结构
 
@@ -65,11 +69,19 @@ Multi-platform Scanning System/
 │   └── js/main.js
 ├── sounds/                 # 预录语音文件（分区播报、错误提示等）
 ├── data/                   # SQLite 数据库存储目录
+├── tools/                  # 开发工具
+│   └── generate_tts.py     # TTS 语音文件批量生成脚本
 ├── android-scanner/        # Android 原生应用
-│   └── app/src/main/java/com/scanner/app/
-│       ├── ui/             # Activity + Fragment (MVVM)
-│       ├── data/           # Repository + Retrofit + Room
-│       └── util/           # TTS、音频、扫码工具类
+│   └── app/src/main/
+│       ├── java/com/scanner/app/
+│       │   ├── ui/             # Activity + Fragment (MVVM)
+│       │   ├── data/           # Repository + Retrofit + Room
+│       │   └── util/           # 音频播放、扫码接收工具类
+│       └── res/
+│           ├── layout/         # 界面布局
+│           ├── drawable/       # 背景图形
+│           ├── raw/            # 预录语音文件 (mp3)
+│           └── values/         # 颜色、字符串、主题
 ├── doc/                    # 开发文档
 │   ├── PRD.md              # 产品需求文档
 │   ├── TECH_STACK.md       # 技术栈说明
@@ -135,13 +147,55 @@ build_apk.bat
 | 方法 | 路径 | 说明 |
 |------|------|------|
 | GET | `/api/ping` | 连接测试 |
-| GET | `/api/qrcode` | 获取连接二维码 |
-| POST | `/api/upload` | 上传 Excel 文件 |
+| GET | `/api/qrcode` | 获取连接二维码（PNG 图片） |
+| POST | `/api/upload` | 上传 Excel 文件（multipart/form-data） |
 | GET | `/api/datasets` | 获取数据集列表 |
-| POST | `/api/datasets` | 数据集操作（切换/删除） |
-| POST | `/api/scan` | 提交扫描记录 |
+| DELETE | `/api/datasets/<id>` | 删除指定数据集 |
+| POST | `/api/set-current-dataset` | 设置当前活跃数据集 |
+| GET | `/api/current-dataset` | 获取当前活跃数据集 |
+| POST | `/api/scan` | 提交扫描记录（JSON: dataset_id, box_number, device_id） |
+| GET | `/api/scan/recent` | 获取最近扫描记录 |
 | GET | `/api/scan/progress/<id>` | 查询扫描进度 |
+| GET | `/api/datasets/<id>/boxes` | 获取数据集所有箱号（离线同步用） |
 | GET | `/api/export/<id>` | 导出数据为 Excel |
+
+## 数据库结构
+
+### PC 端（SQLite）
+
+| 表 | 说明 |
+|------|------|
+| `datasets` | 数据集（名称、文件名、总数、已扫描数、是否当前） |
+| `boxes` | 箱号（箱号、门店地址、分区、扫描状态、扫描时间、设备ID） |
+| `scan_records` | 扫描记录（箱号、分区、状态[normal/duplicate/not_found]、设备ID） |
+
+### Android 端（Room）
+
+| 表 | 说明 |
+|------|------|
+| `cached_scan_records` | 本地缓存扫描记录（含上传状态） |
+| `server_config` | 服务器连接配置 |
+| `local_boxes` | 离线箱号数据（数据集下载缓存） |
+
+## 离线扫描机制
+
+系统采用**本地优先**策略：
+
+1. **数据集下载** — 在 Android 端点击「下载」按钮，将当前数据集所有箱号缓存到本地 Room 数据库
+2. **本地优先查询** — 扫描时优先查询本地缓存，命中则立即返回结果；未命中再请求服务器
+3. **记录缓存** — 所有扫描记录写入本地，标记 `uploaded=false`
+4. **自动上传** — 网络恢复后，后台自动将未上传记录同步到服务器
+
+## 语音文件生成
+
+使用 `tools/generate_tts.py` 批量生成中文语音提示文件：
+
+```bash
+pip install edge-tts
+python tools/generate_tts.py
+```
+
+生成的 MP3 文件输出到 `android-scanner/app/src/main/res/raw/`，涵盖错误提示（网络失败、超时、空箱号等）和状态提示（已连接、断开、下载中等）。
 
 ## 系统要求
 
